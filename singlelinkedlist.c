@@ -128,7 +128,45 @@ address dispose (address head){
     printf("Semua Node telah dihapus!!!\n");
     return(head);
 }
+address bubblesort(address head){
+    int swapped;
+    address ptr1;
+    address lptr = NULL;
+    if(head == NULL){
+        return;
+    }
+    do{
+        swapped = 0;
+        ptr1 = head;
+        while(ptr1->next != lptr){
+            if(ptr1->isi < ptr1->next->isi){
+                swap(ptr1,ptr1->next);
+                swapped = 1;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    }
+    while (swapped);
+    return head;
+}
 
+void swap(address a,address b){
+    int temp = a->isi;
+    a->isi = b->isi;
+    b->isi = temp;
+}
+
+address reverse(address head){
+    address prev = NULL;
+    while(head != NULL){
+        address node_next = head->next;
+        head->next = prev;
+        prev = head;
+        head = node_next;
+    }
+    return prev;
+}
 int main(){
     int pil,val,val1;
     address head = NULL;
@@ -145,6 +183,8 @@ int main(){
         printf("7. Delete After\n");
         printf("8. Hitung jumlah node\n");
         printf("9. Hapus semua Node\n");
+        printf("10. Sort Node \n");
+        printf("11. Reverse Node\n");
         printf("0. Keluar\n");
         printf("Masukkan Pilihan = ");
         scanf("%d",&pil);
@@ -203,6 +243,15 @@ int main(){
                 system("pause");
                 break;
             }
+            case 10:{
+                head = bubblesort(head);
+                system("pause");
+                break;
+            }
+            case 11:{
+                head = reverse(head);
+                system("pause");
+                break;
             case 0:{
                 printf("\n");
                 printf("Program Single Linked List telah selesai!!!\n");
